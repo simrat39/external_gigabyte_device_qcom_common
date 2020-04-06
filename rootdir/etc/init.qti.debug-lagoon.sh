@@ -350,13 +350,16 @@ config_lagoon_dcc_gemnoc()
 
 config_lagoon_dcc_gpu()
 {
+    #GCC
+    echo 0x12D038 > $DCC_PATH/config
+    echo 0x145004 > $DCC_PATH/config
+    echo 0x14500C > $DCC_PATH/config
+
     #GPUCC
     echo 0x3D9106C > $DCC_PATH/config
     echo 0x3D9100C > $DCC_PATH/config
     echo 0x3D91010 > $DCC_PATH/config
-    echo 0x3D91014 > $DCC_PATH/config
     echo 0x3D91070 > $DCC_PATH/config
-    echo 0x3D91074 > $DCC_PATH/config
     echo 0x3D91098 > $DCC_PATH/config
     echo 0x3D91004 > $DCC_PATH/config
     echo 0x3D9109C > $DCC_PATH/config
@@ -1426,7 +1429,7 @@ enable_lagoon_dcc_config()
     config_lagoon_dcc_rsc_tcs
     config_lagoon_dcc_lpass_rsc
     config_lagoon_dcc_mss_rsc
-    #config_lagoon_dcc_gpu
+    config_lagoon_dcc_gpu
     #config_lagoon_dcc_gcc
     #config_lagoon_dcc_l3_rsc
     #config_lagoon_dcc_gcc_other
