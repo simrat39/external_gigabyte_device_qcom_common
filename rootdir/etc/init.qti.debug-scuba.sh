@@ -127,6 +127,9 @@ enable_scuba_stm_events()
     fi
 
     echo $etr_size > /sys/bus/coresight/devices/coresight-tmc-etr/buffer_size
+    if uname -m | grep "armv7l"; then
+        echo 0x1000000 > /sys/bus/coresight/devices/coresight-tmc-etr/buffer_size
+    fi
     echo 1 > /sys/bus/coresight/devices/coresight-tmc-etr/$sinkenable
     echo 1 > /sys/bus/coresight/devices/coresight-stm/$srcenable
     echo 1 > /sys/kernel/debug/tracing/tracing_on
@@ -856,13 +859,13 @@ config_scuba_dcc_core()
     echo 0x0F1D1228 1 > $DCC_PATH/config
 }
 
-config_scuba_dcc_cam()
-{
-    echo 0x5C6F000 > $DCC_PATH/config
-    echo 0x5C42000 > $DCC_PATH/config
-    echo 0x5C42400 > $DCC_PATH/config
-    echo 0x5C23000 > $DCC_PATH/config
-}
+#config_scuba_dcc_cam()
+#{
+    #echo 0x5C6F000 > $DCC_PATH/config
+    #echo 0x5C42000 > $DCC_PATH/config
+    #echo 0x5C42400 > $DCC_PATH/config
+    #echo 0x5C23000 > $DCC_PATH/config
+#}
 
 # Function to send ASYNC package in TPDA
 dcc_async_package()
@@ -897,7 +900,7 @@ enable_scuba_dcc_config()
     config_scuba_dcc_misc
     config_scuba_dcc_osm
     config_acp_status
-    config_scuba_dcc_cam
+    #config_scuba_dcc_cam
 
     #configure sink for LL2 as atb
     echo 1 > /sys/bus/coresight/devices/coresight-tpdm-dcc/enable_source
